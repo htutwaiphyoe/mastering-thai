@@ -3,8 +3,17 @@
     font-size: 1.6rem;
     font-family: inherit;
     font-weight: inherit;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .SearchInput {
-    width: 50%;
+    width: 70%;
+}
+.SearchBar form {
+    flex: 1;
+}
+.SearchBar img {
+    width: 11rem;
 }

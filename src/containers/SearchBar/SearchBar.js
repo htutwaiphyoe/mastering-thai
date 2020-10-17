@@ -1,32 +1,34 @@
 import React from "react";
 import classes from "./SearchBar.module.css";
+import logo from "../../assets/img/log.webp";
 class SearchBar extends React.Component {
     state = {
         input: "",
     };
 
-    onInputChange = (e) => {
+    onChangeHandler = (e) => {
         this.setState({
-            input: e.target.value.trim(),
+            input: e.target.value,
         });
     };
 
-    onFormSubmit = (e) => {
+    onSubmitHandler = (e) => {
         e.preventDefault();
-        if (this.state.input) {
-            console.log(this.state.input);
+        if (this.state.input.trim()) {
+            this.props.onSearchHandler(this.state.input.trim());
         }
     };
     render() {
         return (
             <div className={`ui segment  ${classes.SearchBar}`}>
-                <form className="ui form" onSubmit={this.onFormSubmit}>
+                <img src={logo} alt="VTube logo" />
+                <form className="ui form" onSubmit={this.onSubmitHandler}>
                     <div className={`ui icon input huge ${classes.SearchInput}`}>
                         <input
                             type="text"
                             placeholder="Search..."
                             value={this.state.input}
-                            onChange={this.onInputChange}
+                            onChange={this.onChangeHandler}
                         />
                         <i className="search icon"></i>
                     </div>
