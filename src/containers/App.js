@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./App.module.css";
 import youtube from "../api/youtube";
 import SearchBar from "./SearchBar/SearchBar";
+import VideoLlist from "../components/VideoList/VideoList";
 class App extends Component {
     state = {
         query: "",
@@ -22,6 +23,7 @@ class App extends Component {
         return (
             <div className={classes.App}>
                 <SearchBar onSearchHandler={this.onSearchHandler} />
+                <VideoLlist videos={this.state.videos} />
             </div>
         );
     }
