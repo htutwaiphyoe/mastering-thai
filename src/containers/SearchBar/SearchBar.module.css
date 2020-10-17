@@ -1,0 +1,10 @@
+.SearchBar {
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: inherit;
+    font-weight: inherit;
+}
+
+.SearchInput {
+    width: 50%;
+}
