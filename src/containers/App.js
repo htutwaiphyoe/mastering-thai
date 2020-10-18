@@ -26,12 +26,10 @@ class App extends React.Component {
         });
 
         this.setState({ videos: response.data.items });
-        console.log(response.data.items);
     };
 
     onSelectHandler = (v) => {
         this.setState({ selectedVideo: v, selected: true });
-        console.log(v);
     };
 
     show() {
