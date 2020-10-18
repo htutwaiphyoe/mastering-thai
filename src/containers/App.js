@@ -1,29 +1,71 @@
-import React, { Component } from "react";
-import classes from "./App.module.css";
-import youtube from "../api/youtube";
+import React from "react";
 import SearchBar from "./SearchBar/SearchBar";
-import VideoLlist from "../components/VideoList/VideoList";
-class App extends Component {
+import Header from "../components/Header/Header";
+import Logo from "../components/Header/Logo/Logo";
+import NavigationList from "../components/Header/NavigationList/NavigationList";
+import youtube from "../api/youtube";
+import VideoList from "../components/VideoList/VideoList";
+import classes from "./App.module.css";
+import VideoDetial from "../components/VideoDetail/VideoDetial";
+class App extends React.Component {
     state = {
-        query: "",
+        icons: ["bell", "user"],
         videos: [],
+        selectedVideo: null,
+        selected: false,
     };
+    componentDidMount() {
+        this.onLoadHandler();
+    }
 
-    onSearchHandler = async (query) => {
-        const response = await youtube.get("/search", {
-            params: { q: query },
+    onLoadHandler = async () => {
+        const response = await youtube.get(`/videos`, {
+            params: {
+                chart: "mostPopular",
+            },
         });
 
-        const oldVideos = [...this.state.videos];
-
-        this.setState({ videos: [...oldVideos, ...response.data.items], query: query });
-        console.log(this.state.videos);
+        this.setState({ videos: response.data.items });
+        console.log(response.data.items);
     };
+
+    onSelectHandler = (v) => {
+        this.setState({ selectedVideo: v, selected: true });
+        console.log(v);
+    };
+
+    show() {
+        if (this.state.selectedVideo) {
+            return (
+                <div className={`${classes.App} ${classes.Select}`}>
+                    <VideoDetial video={this.state.selectedVideo} />
+                    <VideoList
+                        videos={this.state.videos}
+                        onSelectHandler={this.onSelectHandler}
+                        selected={this.state.selected}
+                    />
+                </div>
+            );
+        }
+        return (
+            <div className={`${classes.App}`}>
+                <VideoList
+                    videos={this.state.videos}
+                    onSelectHandler={this.onSelectHandler}
+                    selected={this.state.selected}
+                />
+            </div>
+        );
+    }
     render() {
         return (
-            <div className={classes.App}>
-                <SearchBar onSearchHandler={this.onSearchHandler} />
-                <VideoLlist videos={this.state.videos} />
+            <div>
+                <Header>
+                    <Logo />
+                    <SearchBar />
+                    <NavigationList icons={this.state.icons} />
+                </Header>
+                {this.show()}
             </div>
         );
     }
