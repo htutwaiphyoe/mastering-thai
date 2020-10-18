@@ -2,7 +2,9 @@ import React from "react";
 
 const VideoDetial = (props) => {
     const { video } = props;
-    const url = `https://www.youtube.com/embed/${video.id}?autoplay=1`;
+    const url = `https://www.youtube.com/embed/${
+        props.search ? video.id.videoId : video.id
+    }?autoplay=1`;
     const publishedAt = video.snippet.publishedAt.split("T");
 
     return (

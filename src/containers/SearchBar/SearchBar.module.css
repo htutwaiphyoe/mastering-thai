@@ -34,6 +34,7 @@
     padding: 0.6rem 2rem;
     border: 1px solid #ccc;
     background-color: #f8f8f8;
+    cursor: pointer;
 }
 
 .SearchIcon {
