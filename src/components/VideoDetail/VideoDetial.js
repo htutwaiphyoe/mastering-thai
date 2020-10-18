@@ -10,7 +10,7 @@ const VideoDetial = (props) => {
     return (
         <div>
             <div className="ui embed">
-                <iframe src={url} title={video.snippet.title} />
+                <iframe src={url} title={video.snippet.title} allowFullScreen />
             </div>
             <h1>{`${video.snippet.title} `}</h1>
             <p>{`Published: ${publishedAt.join(" ").replace("Z", "")}`}</p>
