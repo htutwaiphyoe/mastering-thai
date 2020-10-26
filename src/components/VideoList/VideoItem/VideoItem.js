@@ -1,10 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import classes from "./VideoItem.module.css";
+import * as actionCreators from "../../../actions";
 const VideoItem = (props) => {
     const { video, selected } = props;
-
+    const onClickHandler = () => {
+        props.selectVideo(video);
+        props.selected("SELECTED_ON");
+    };
     return (
-        <div className={classes.VideoItem} onClick={() => props.onSelect(video)}>
+        <div className={classes.VideoItem} onClick={onClickHandler}>
             <div className={selected ? null : classes.Thunbnail}>
                 <img
                     src={video.snippet.thumbnails.medium.url}
@@ -20,4 +25,15 @@ const VideoItem = (props) => {
     );
 };
 
-export default VideoItem;
+const mapStateToProps = (state) => {
+    return {
+        selected: state.ui.selected,
+    };
+};
+
+const mapDispatchToProps = {
+    selectVideo: actionCreators.selectVideo,
+    selected: actionCreators.selected,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoItem);

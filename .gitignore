@@ -2,6 +2,7 @@
 
 # custom
 .prettierrc
+*.log
 # dependencies
 /node_modules
 /.pnp

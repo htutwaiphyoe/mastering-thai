@@ -1,9 +1,9 @@
 import React from "react";
-
+import { connect } from "react-redux";
 const VideoDetial = (props) => {
     const { video } = props;
     const url = `https://www.youtube.com/embed/${
-        props.search ? video.id.videoId : video.id
+        typeof video.id === "object" ? video.id.videoId : video.id
     }?autoplay=1`;
     const publishedAt = video.snippet.publishedAt.split("T");
 
@@ -21,4 +21,9 @@ const VideoDetial = (props) => {
     );
 };
 
-export default VideoDetial;
+const mapStateToProps = (state) => {
+    return {
+        video: state.videos.selectedVideo,
+    };
+};
+export default connect(mapStateToProps)(VideoDetial);

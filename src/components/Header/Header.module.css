@@ -4,6 +4,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 100;
 }
 
 @media only screen and (max-width: 768px) {

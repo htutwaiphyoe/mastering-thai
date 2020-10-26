@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react";
+import { connect } from "react-redux";
 import VideoItem from "./VideoItem/VideoItem";
 import classes from "./VideoList.module.css";
+import * as actionCreators from "../../actions";
 const VideoList = (props) => {
     const listRef = useRef(null);
 
@@ -10,12 +12,7 @@ const VideoList = (props) => {
         }
     }, []);
     const videos = props.videos.map((video) => (
-        <VideoItem
-            video={video}
-            key={props.search ? video.id.videoId : video.id}
-            onSelect={props.onSelectHandler}
-            selected={props.selected}
-        />
+        <VideoItem video={video} key={typeof video.id === "object" ? video.id.videoId : video.id} />
     ));
 
     return (
@@ -24,5 +21,14 @@ const VideoList = (props) => {
         </div>
     );
 };
+const mapStateToProps = (state) => {
+    return {
+        selected: state.ui.selected,
+        videos: state.videos.shownVideos,
+    };
+};
 
-export default VideoList;
+const mapDispatchToProps = {
+    getListRef: actionCreators.getListRef,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(VideoList);

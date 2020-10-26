@@ -1,19 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import classes from "./SearchBar.module.css";
+import * as actionCreators from "../../actions";
 class SearchBar extends React.Component {
-    state = {
-        input: "",
-    };
-
     onChangeHandler = (event) => {
         event.preventDefault();
-        this.setState({ input: event.target.value });
+        this.props.setQuery(event.target.value);
     };
 
     onSubmitHandler = (event) => {
         event.preventDefault();
-        if (this.state.input.trim()) {
-            this.props.onSubmit(this.state.input.trim());
+        if (this.props.query.trim()) {
+            this.props.searchVideo(this.props.query.trim());
         }
     };
     render() {
@@ -24,7 +22,7 @@ class SearchBar extends React.Component {
                         type="text"
                         placeholder="Search..."
                         className={classes.SearchInput}
-                        value={this.state.input}
+                        value={this.props.query}
                         onChange={this.onChangeHandler}
                     />
                     <button type="submit" className={classes.SearchBtn}>
@@ -35,5 +33,13 @@ class SearchBar extends React.Component {
         );
     }
 }
-
-export default SearchBar;
+const mapStateToProps = (state) => {
+    return {
+        query: state.ui.query,
+    };
+};
+const mapDispatchToProps = {
+    searchVideo: actionCreators.searchVideos,
+    setQuery: actionCreators.setQuery,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
