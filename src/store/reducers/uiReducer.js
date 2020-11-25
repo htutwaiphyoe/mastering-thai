@@ -1,3 +1,5 @@
+import * as actionTypes from "../actions/actionTypes";
+import { updateObject } from "../../utils/utils";
 const initialState = {
     loading: false,
     selected: false,
@@ -16,8 +18,8 @@ export default (state = initialState, action) => {
             return { ...state, selected: true };
         case "SELECTED_OFF":
             return { ...state, selected: false };
-        case "GET_LIST_REF":
-            return { ...state, listRef: action.payload };
+        case actionTypes.GET_LIST_REF:
+            return updateObject(state, { listRef: action.payload });
         case "SET_QUERY":
             return { ...state, query: action.payload };
 

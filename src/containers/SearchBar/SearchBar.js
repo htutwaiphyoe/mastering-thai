@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import classes from "./SearchBar.module.css";
-import * as actionCreators from "../../actions";
+import * as actionCreators from "../../store/actions";
 class SearchBar extends React.Component {
     onChangeHandler = (event) => {
         event.preventDefault();

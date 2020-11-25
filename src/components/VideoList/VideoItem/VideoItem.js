@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import classes from "./VideoItem.module.css";
-import * as actionCreators from "../../../actions";
+import * as actionCreators from "../../../store/actions";
 const VideoItem = (props) => {
     const { video, selected } = props;
     const onClickHandler = () => {

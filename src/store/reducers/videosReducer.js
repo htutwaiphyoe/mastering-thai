@@ -1,33 +1,26 @@
+import * as actionTypes from "../actions/actionTypes";
+import { updateObject } from "../../utils/utils";
 const initialState = {
     responseVideos: [],
     shownVideos: [],
     selectedVideo: null,
 };
 
-const loadVideos = (state, action) => {
+const storeVideos = (state, action) => {
     const responseVideos = action.payload;
     responseVideos.forEach((video) => {
         video.selected = false;
     });
     const shownVideos = responseVideos.slice(0, 5);
     responseVideos.splice(0, 5);
-    return {
-        ...state,
-        responseVideos,
-        shownVideos,
-        selectedVideo: null,
-    };
+    return updateObject(state, { responseVideos, shownVideos, selectedVideo: null });
 };
 
-const scrollVideos = (state) => {
-    const responseV = [...state.responseVideos];
-    const shownV = [...state.shownVideos, ...responseV.slice(0, 5)];
-    responseV.splice(0, 5);
-    return {
-        ...state,
-        responseVideos: responseV,
-        shownVideos: shownV,
-    };
+const loadVideos = (state) => {
+    const responseVideos = [...state.responseVideos];
+    const shownVideos = [...state.shownVideos, ...responseVideos.slice(0, 5)];
+    responseVideos.splice(0, 5);
+    return updateObject(state, { responseVideos, shownVideos });
 };
 
 const selectVideo = (state, action) => {
@@ -54,10 +47,10 @@ const selectVideo = (state, action) => {
 };
 export default (state = initialState, action) => {
     switch (action.type) {
-        case "LOAD_VIDEOS":
-            return loadVideos(state, action);
-        case "SCROLL_VIDEOS":
-            return scrollVideos(state);
+        case actionTypes.STORE_VIDEOS:
+            return storeVideos(state, action);
+        case actionTypes.LOAD_VIDEOS:
+            return loadVideos(state);
         case "SELECT_VIDEO":
             return selectVideo(state, action);
         default:
