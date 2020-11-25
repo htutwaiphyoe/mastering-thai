@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import * as actionCreators from "../../store/actions";
@@ -19,15 +19,22 @@ const Search = (props) => {
             dispatch(actionCreators.searchVideos(id));
         }
     }, [dispatch, id]);
-    useEffect(() => {
-        window.addEventListener("scroll", () => {
-            if (list) {
-                if (window.scrollY + window.innerHeight > (list.clientHeight * 4) / 5) {
+    const scrollHandler = useCallback(() => {
+        if (list) {
+            if (window.scrollY + window.innerHeight > (list.clientHeight * 4) / 5) {
+                if (shownVideos.length !== 50) {
                     dispatch(actionCreators.scroll());
                 }
             }
-        });
-    }, [list, dispatch]);
+        }
+    }, [list, dispatch, shownVideos.length]);
+    useEffect(() => {
+        window.addEventListener("scroll", scrollHandler);
+
+        return () => {
+            window.removeEventListener("scroll", scrollHandler);
+        };
+    }, [scrollHandler, dispatch]);
     return <VideoList videos={shownVideos} />;
 };
 

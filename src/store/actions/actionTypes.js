@@ -6,3 +6,4 @@ export const STORE_VIDEO = "STORE_VIDEO";
 // ui
 export const GET_LIST_REF = "GET_LIST_REF";
 export const SELECTED = "SELECTED";
+export const REQUESTED = "REQUESTED";

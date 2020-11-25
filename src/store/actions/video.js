@@ -1,13 +1,16 @@
 import * as actionTypes from "./actionTypes";
 import youtube from "../../api/youtube";
+import { requested } from "./ui";
 export const loadVideos = () => async (dispatch) => {
     try {
+        dispatch(requested(true));
         const response = await youtube.get("/videos", {
             params: {
                 chart: "mostPopular",
             },
         });
         dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
+        dispatch(requested(false));
     } catch (error) {
         console.log(error);
     }

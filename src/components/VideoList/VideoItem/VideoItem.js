@@ -2,11 +2,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 
+import Skeleton from "@material-ui/lab/Skeleton";
 import classes from "./VideoItem.module.css";
 import * as actionCreators from "../../../store/actions";
 const VideoItem = (props) => {
     const dispatch = useDispatch();
     const selected = useSelector((state) => state.ui.selected);
+
     const { video } = props;
     const onClickHandler = () => {
         dispatch(actionCreators.selectVideo(video));
@@ -23,15 +25,27 @@ const VideoItem = (props) => {
     return (
         <div className={classes.VideoItem} onClick={onClickHandler}>
             <div className={selected ? null : classes.Thunbnail}>
-                <img
-                    src={video.snippet.thumbnails.medium.url}
-                    alt={video.snippet.title}
-                    className={selected ? classes.ThumbnailImg : classes.ThumbnailImg2}
-                />
+                {video.loading ? (
+                    <Skeleton variant="rect" width="100%" height={180} />
+                ) : (
+                    <img
+                        src={video.snippet.thumbnails.medium.url}
+                        alt={video.snippet.title}
+                        className={selected ? classes.ThumbnailImg : classes.ThumbnailImg2}
+                    />
+                )}
             </div>
 
             <div className={classes.VideoItemText}>
-                <p>{video.snippet.title}</p>
+                {video.loading ? (
+                    <React.Fragment>
+                        <Skeleton variant="text" />
+                        <Skeleton variant="text" />
+                        <Skeleton variant="text" />
+                    </React.Fragment>
+                ) : (
+                    <p>{video.snippet.title}</p>
+                )}
             </div>
         </div>
     );

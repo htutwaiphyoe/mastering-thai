@@ -5,9 +5,10 @@ export const selected = (payload) => {
         payload,
     };
 };
-export const loadRequest = (type) => {
+export const requested = (payload) => {
     return {
-        type,
+        type: actionTypes.REQUESTED,
+        payload,
     };
 };
 

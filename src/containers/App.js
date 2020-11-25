@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-
 import Layout from "./Layout/Layout";
 
 const Home = React.lazy(() => import("./Home/Home"));
@@ -33,6 +32,7 @@ const App = (props) => {
                         <Route path="/search" component={Search} exact />
                     </Switch>
                 </Suspense>
+            
             </Layout>
         </React.Fragment>
     );

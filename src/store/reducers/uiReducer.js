@@ -10,10 +10,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case "START_LOADING":
-            return { ...state, loading: true };
-        case "STOP_LOADING":
-            return { ...state, loading: false };
+        case actionTypes.REQUESTED:
+            return updateObject(state, { loading: action.payload });
         case actionTypes.SELECTED:
             return updateObject(state, { selected: action.payload });
         case actionTypes.GET_LIST_REF:
