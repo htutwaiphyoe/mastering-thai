@@ -1,6 +1,6 @@
 import youtube from "../../api/youtube";
-export { loadVideos } from "./home";
-export { getListRef, loadRequest, scroll, selectVideo, setQuery, selected } from "./ui";
+export { loadVideos, selectVideo, loadVideo } from "./video";
+export { getListRef, loadRequest, scroll, setQuery, selected } from "./ui";
 
 export const searchVideos = (q) => async (dispatch) => {
     const response = await youtube.get(`/search`, {
@@ -8,6 +8,5 @@ export const searchVideos = (q) => async (dispatch) => {
             q,
         },
     });
-    // dispatch(selected("SELECTED_OFF"));
     dispatch({ type: "LOAD_VIDEOS", payload: response.data.items });
 };

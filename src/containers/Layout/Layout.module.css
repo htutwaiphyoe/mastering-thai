@@ -4,19 +4,7 @@
     background: #fff;
 }
 
-.Layout.Select {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-}
-
-@media only screen and (max-width: 992px) {
-    .Layout.Select {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-    }
-}
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 768px) {
     .Layout {
         padding: 2rem 1rem;
     }

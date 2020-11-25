@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import VideoItem from "./VideoItem/VideoItem";
 import classes from "./VideoList.module.css";
 import * as actionCreators from "../../store/actions";
 const VideoList = (props) => {
     const dispatch = useDispatch();
+    const selected = useSelector((state) => state.ui.selected);
     const listRef = useRef(null);
 
     useEffect(() => {
@@ -17,18 +18,10 @@ const VideoList = (props) => {
     ));
 
     return (
-        <div className={props.selected ? "" : classes.VideoList} ref={listRef}>
+        <div className={selected ? "" : classes.VideoList} ref={listRef}>
             {videos}
         </div>
     );
 };
-const mapStateToProps = (state) => {
-    return {
-        selected: state.ui.selected,
-    };
-};
 
-const mapDispatchToProps = {
-    getListRef: actionCreators.getListRef,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(VideoList);
+export default VideoList;

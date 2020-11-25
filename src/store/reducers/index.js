@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import videosReducer from "./videosReducer";
+import videoReducer from "./videoReducer";
 import uiReducer from "./uiReducer";
 export default combineReducers({
-    videos: videosReducer,
+    videos: videoReducer,
     ui: uiReducer,
 });

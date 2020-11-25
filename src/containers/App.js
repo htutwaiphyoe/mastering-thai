@@ -1,13 +1,11 @@
 import React, { Suspense } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Layout from "./Layout/Layout";
 
 const Home = React.lazy(() => import("./Home/Home"));
-
+const Watch = React.lazy(() => import("./Watch/Watch"));
 const App = (props) => {
-
-
     // show() {
     //     if (this.props.selectedVideo) {
     //         return (
@@ -28,7 +26,10 @@ const App = (props) => {
         <React.Fragment>
             <Layout>
                 <Suspense fallback={null}>
-                    <Route path="/" component={Home} exact />
+                    <Switch>
+                        <Route path="/" component={Home} exact />
+                        <Route path="/watch" component={Watch} exact />
+                    </Switch>
                 </Suspense>
             </Layout>
         </React.Fragment>

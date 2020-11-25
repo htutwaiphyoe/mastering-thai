@@ -14,10 +14,8 @@ export default (state = initialState, action) => {
             return { ...state, loading: true };
         case "STOP_LOADING":
             return { ...state, loading: false };
-        case "SELECTED_ON":
-            return { ...state, selected: true };
-        case "SELECTED_OFF":
-            return { ...state, selected: false };
+        case actionTypes.SELECTED:
+            return updateObject(state, { selected: action.payload });
         case actionTypes.GET_LIST_REF:
             return updateObject(state, { listRef: action.payload });
         case "SET_QUERY":

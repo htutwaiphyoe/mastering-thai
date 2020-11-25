@@ -1,12 +1,24 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 import classes from "./VideoItem.module.css";
 import * as actionCreators from "../../../store/actions";
 const VideoItem = (props) => {
-    const { video, selected } = props;
+    const dispatch = useDispatch();
+    const selected = useSelector((state) => state.ui.selected);
+    const { video } = props;
     const onClickHandler = () => {
-        props.selectVideo(video);
-        props.selected("SELECTED_ON");
+        dispatch(actionCreators.selectVideo(video));
+        dispatch(actionCreators.selected(true));
+
+        props.history.push(
+            `/watch?${encodeURIComponent("v")}=${
+                typeof video.id === "object"
+                    ? encodeURIComponent(video.id.videoId)
+                    : encodeURIComponent(video.id)
+            }`
+        );
     };
     return (
         <div className={classes.VideoItem} onClick={onClickHandler}>
@@ -19,21 +31,10 @@ const VideoItem = (props) => {
             </div>
 
             <div className={classes.VideoItemText}>
-                <p>{props.video.snippet.title}</p>
+                <p>{video.snippet.title}</p>
             </div>
         </div>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        selected: state.ui.selected,
-    };
-};
-
-const mapDispatchToProps = {
-    selectVideo: actionCreators.selectVideo,
-    selected: actionCreators.selected,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(VideoItem);
+export default withRouter(VideoItem);

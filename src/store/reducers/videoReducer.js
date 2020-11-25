@@ -13,7 +13,7 @@ const storeVideos = (state, action) => {
     });
     const shownVideos = responseVideos.slice(0, 5);
     responseVideos.splice(0, 5);
-    return updateObject(state, { responseVideos, shownVideos, selectedVideo: null });
+    return updateObject(state, { responseVideos, shownVideos });
 };
 
 const loadVideos = (state) => {
@@ -31,19 +31,31 @@ const selectVideo = (state, action) => {
         i = state.shownVideos.findIndex((video) => video.id.videoId === action.payload.id.videoId);
     }
 
-    const shownV2 = [...state.shownVideos];
+    const shownVideos = [...state.shownVideos];
     const selectedVideo = state.selectedVideo;
 
     if (selectedVideo) {
-        shownV2.push(selectedVideo);
+        shownVideos.push(selectedVideo);
     }
 
-    shownV2.splice(i, 1);
-    return {
-        ...state,
-        shownVideos: shownV2,
-        selectedVideo: action.payload,
-    };
+    shownVideos.splice(i, 1);
+    return updateObject(state, { shownVideos, selectedVideo: action.payload });
+};
+
+const storeVideo = (state, action) => {
+    let i;
+    if (typeof action.payload.id === "string") {
+        i = state.shownVideos.findIndex((video) => video.id === action.payload.id);
+    } else {
+        i = state.shownVideos.findIndex((video) => video.id.videoId === action.payload.id.videoId);
+    }
+
+    const shownVideos = [...state.shownVideos];
+
+    shownVideos.splice(i, 1);
+    return updateObject(state, { shownVideos, selectedVideo: action.payload });
+
+    // return updateObject(state, { selectedVideo: action.payload });
 };
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -51,8 +63,10 @@ export default (state = initialState, action) => {
             return storeVideos(state, action);
         case actionTypes.LOAD_VIDEOS:
             return loadVideos(state);
-        case "SELECT_VIDEO":
+        case actionTypes.SELECT_VIDEO:
             return selectVideo(state, action);
+        case actionTypes.STORE_VIDEO:
+            return storeVideo(state, action);
         default:
             return state;
     }

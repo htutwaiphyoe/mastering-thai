@@ -1,7 +1,8 @@
 import * as actionTypes from "./actionTypes";
-export const selected = (type) => {
+export const selected = (payload) => {
     return {
-        type,
+        type: actionTypes.SELECTED,
+        payload,
     };
 };
 export const loadRequest = (type) => {
@@ -13,13 +14,6 @@ export const loadRequest = (type) => {
 export const scroll = () => {
     return {
         type: actionTypes.LOAD_VIDEOS,
-    };
-};
-
-export const selectVideo = (video) => {
-    return {
-        type: "SELECT_VIDEO",
-        payload: video,
     };
 };
 
