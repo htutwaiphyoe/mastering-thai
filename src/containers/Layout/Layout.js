@@ -1,6 +1,6 @@
 import React from "react";
 
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../Search/SearchBar/SearchBar";
 import Header from "../../components/Header/Header";
 import Logo from "../../components/Header/Logo/Logo";
 import NavigationList from "../../components/Header/NavigationList/NavigationList";

@@ -33,3 +33,17 @@ export const selectVideo = (video) => {
         payload: video,
     };
 };
+
+export const searchVideos = (q) => async (dispatch) => {
+    try {
+        const response = await youtube.get(`/search`, {
+            params: {
+                q,
+            },
+        });
+        console.log(response);
+        dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
+    } catch (err) {
+        console.log(err);
+    }
+};

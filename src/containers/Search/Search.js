@@ -3,15 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 
 import * as actionCreators from "../../store/actions";
 import VideoList from "../../components/VideoList/VideoList";
-const Home = (props) => {
+const Search = (props) => {
     const dispatch = useDispatch();
     const shownVideos = useSelector((state) => state.videos.shownVideos);
     const list = useSelector((state) => state.ui.listRef);
+    const query = new URLSearchParams(props.location.search);
+    let id = "";
+    for (let params of query.entries()) {
+        id = params[1];
+    }
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(actionCreators.selected(false));
-        dispatch(actionCreators.loadVideos());
-    }, [dispatch]);
+        if (id) {
+            dispatch(actionCreators.searchVideos(id));
+        }
+    }, [dispatch, id]);
     useEffect(() => {
         window.addEventListener("scroll", () => {
             if (list) {
@@ -21,8 +28,7 @@ const Home = (props) => {
             }
         });
     }, [list, dispatch]);
-
     return <VideoList videos={shownVideos} />;
 };
 
-export default Home;
+export default Search;

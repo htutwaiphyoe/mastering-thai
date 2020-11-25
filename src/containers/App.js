@@ -5,6 +5,7 @@ import Layout from "./Layout/Layout";
 
 const Home = React.lazy(() => import("./Home/Home"));
 const Watch = React.lazy(() => import("./Watch/Watch"));
+const Search = React.lazy(() => import("./Search/Search"));
 const App = (props) => {
     // show() {
     //     if (this.props.selectedVideo) {
@@ -29,6 +30,7 @@ const App = (props) => {
                     <Switch>
                         <Route path="/" component={Home} exact />
                         <Route path="/watch" component={Watch} exact />
+                        <Route path="/search" component={Search} exact />
                     </Switch>
                 </Suspense>
             </Layout>
