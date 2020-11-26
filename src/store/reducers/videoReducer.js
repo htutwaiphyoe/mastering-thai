@@ -11,15 +11,15 @@ const storeVideos = (state, action) => {
     responseVideos.forEach((video) => {
         video.selected = false;
     });
-    const shownVideos = responseVideos.slice(0, 5);
-    responseVideos.splice(0, 5);
-    return updateObject(state, { responseVideos, shownVideos });
+    const shownVideos = responseVideos.slice(0, 10);
+    responseVideos.splice(0, 10);
+    return updateObject(state, { responseVideos, shownVideos, selectedVideo: null });
 };
 
 const loadVideos = (state) => {
     const responseVideos = [...state.responseVideos];
-    const shownVideos = [...state.shownVideos, ...responseVideos.slice(0, 5)];
-    responseVideos.splice(0, 5);
+    const shownVideos = [...state.shownVideos, ...responseVideos.slice(0, 10)];
+    responseVideos.splice(0, 10);
     return updateObject(state, { responseVideos, shownVideos });
 };
 

@@ -24,10 +24,3 @@ export const getListRef = (list) => {
         payload: list,
     };
 };
-
-export const setQuery = (q) => {
-    return {
-        type: "SET_QUERY",
-        payload: q,
-    };
-};

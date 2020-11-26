@@ -4,8 +4,6 @@ const initialState = {
     loading: false,
     selected: false,
     listRef: null,
-    searched: false,
-    query: "",
 };
 
 export default (state = initialState, action) => {
@@ -16,9 +14,6 @@ export default (state = initialState, action) => {
             return updateObject(state, { selected: action.payload });
         case actionTypes.GET_LIST_REF:
             return updateObject(state, { listRef: action.payload });
-        case "SET_QUERY":
-            return { ...state, query: action.payload };
-
         default:
             return state;
     }

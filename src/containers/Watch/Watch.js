@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import VideoList from "../../components/VideoList/VideoList";
 import VideoDetial from "../../components/VideoDetail/VideoDetial";
@@ -19,17 +20,26 @@ const Watch = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(actionCreators.selected(true));
-        if (!selectedVideo && shownVideos.length === 0) {
-            dispatch(actionCreators.loadVideos());
-            dispatch(actionCreators.loadVideo(id));
-        }
-        if (!selectedVideo && shownVideos.length > 0) {
-            dispatch(actionCreators.loadVideo(id));
-        }
-    }, [dispatch, selectedVideo, id, shownVideos.length]);
+    }, [dispatch]);
 
-    if (!selectedVideo) {
-        return <div>Loading...</div>;
+    const scrollHandler = useCallback(() => {
+        if (list) {
+            if (window.scrollY + window.innerHeight > (list.clientHeight * 4) / 5) {
+                if (shownVideos.length !== 50) {
+                    dispatch(actionCreators.scroll());
+                }
+            }
+        }
+    }, [list, dispatch, shownVideos.length]);
+    useEffect(() => {
+        window.addEventListener("scroll", scrollHandler);
+        return () => {
+            window.removeEventListener("scroll", scrollHandler);
+        };
+    }, [scrollHandler]);
+
+    if (shownVideos.length === 0) {
+        return <Redirect to="/" />;
     }
     return (
         <div className={classes.Watch}>

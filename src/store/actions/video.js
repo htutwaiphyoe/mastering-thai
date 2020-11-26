@@ -9,6 +9,7 @@ export const loadVideos = () => async (dispatch) => {
                 chart: "mostPopular",
             },
         });
+        console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
         dispatch(requested(false));
     } catch (error) {
