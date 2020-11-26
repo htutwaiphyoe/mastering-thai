@@ -7,3 +7,4 @@ export const STORE_VIDEO = "STORE_VIDEO";
 export const GET_LIST_REF = "GET_LIST_REF";
 export const SELECTED = "SELECTED";
 export const REQUESTED = "REQUESTED";
+export const ERROR = "ERROR";

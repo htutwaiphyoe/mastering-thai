@@ -11,12 +11,6 @@ const Watch = (props) => {
     const shownVideos = useSelector((state) => state.videos.shownVideos);
     const selectedVideo = useSelector((state) => state.videos.selectedVideo);
     const list = useSelector((state) => state.ui.listRef);
-    const query = new URLSearchParams(props.location.search);
-    let id = "";
-    for (let params of query.entries()) {
-        id = params[1];
-    }
-
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(actionCreators.selected(true));

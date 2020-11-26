@@ -11,16 +11,18 @@ const VideoItem = (props) => {
 
     const { video } = props;
     const onClickHandler = () => {
-        dispatch(actionCreators.selectVideo(video));
-        dispatch(actionCreators.selected(true));
+        if (!video.loading) {
+            dispatch(actionCreators.selectVideo(video));
+            dispatch(actionCreators.selected(true));
 
-        props.history.push(
-            `/watch?${encodeURIComponent("v")}=${
-                typeof video.id === "object"
-                    ? encodeURIComponent(video.id.videoId)
-                    : encodeURIComponent(video.id)
-            }`
-        );
+            props.history.push(
+                `/watch?${encodeURIComponent("v")}=${
+                    typeof video.id === "object"
+                        ? encodeURIComponent(video.id.videoId)
+                        : encodeURIComponent(video.id)
+                }`
+            );
+        }
     };
     return (
         <div className={classes.VideoItem} onClick={onClickHandler}>

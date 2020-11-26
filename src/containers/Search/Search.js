@@ -8,6 +8,7 @@ const Search = (props) => {
     const shownVideos = useSelector((state) => state.videos.shownVideos);
     const list = useSelector((state) => state.ui.listRef);
     const loading = useSelector((state) => state.ui.loading);
+    const error = useSelector((state) => state.ui.error);
     const query = new URLSearchParams(props.location.search);
     let id = "";
     for (let params of query.entries()) {
@@ -48,6 +49,9 @@ const Search = (props) => {
                 ]}
             />
         );
+    }
+    if (error) {
+        return <div>Error</div>;
     }
     return <VideoList videos={shownVideos} />;
 };

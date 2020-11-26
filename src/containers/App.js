@@ -6,22 +6,6 @@ const Home = React.lazy(() => import("./Home/Home"));
 const Watch = React.lazy(() => import("./Watch/Watch"));
 const Search = React.lazy(() => import("./Search/Search"));
 const App = (props) => {
-    // show() {
-    //     if (this.props.selectedVideo) {
-    //         return (
-    //             <div className={`${classes.App} ${classes.Select}`}>
-    //                 <VideoDetial />
-    //                 <VideoList />
-    //             </div>
-    //         );
-    //     }
-    //     return (
-    //         <div className={`${classes.App}`}>
-    //             <VideoList />
-    //         </div>
-    //     );
-    // }
-
     return (
         <React.Fragment>
             <Layout>
@@ -32,22 +16,8 @@ const App = (props) => {
                         <Route path="/search" component={Search} exact />
                     </Switch>
                 </Suspense>
-            
             </Layout>
         </React.Fragment>
     );
 };
-// const mapStateToProps = (state) => {
-//     return {
-//         loading: state.ui.loading,
-//         selectedVideo: state.videos.selectedVideo,
-//         list: state.ui.listRef,
-//     };
-// };
-
-// const mapDispatchToProps = {
-//     loadVideos: actionCreators.loadVideos,
-//     loadRequest: actionCreators.loadRequest,
-//     scrollVideos: actionCreators.scrollVideos,
-// };
 export default App;

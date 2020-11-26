@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 import * as actionCreators from "../../store/actions";
 import VideoList from "../../components/VideoList/VideoList";
+import MessageBox from "../../components/MessageBox/MessageBox";
 const Home = (props) => {
     const dispatch = useDispatch();
     const shownVideos = useSelector((state) => state.videos.shownVideos);
     const loading = useSelector((state) => state.ui.loading);
+    const error = useSelector((state) => state.ui.error);
     const list = useSelector((state) => state.ui.listRef);
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -42,6 +44,10 @@ const Home = (props) => {
                 ]}
             />
         );
+    }
+    console.log(error);
+    if (error) {
+        return <MessageBox message={error.message} />;
     }
     return <VideoList videos={shownVideos} />;
 };

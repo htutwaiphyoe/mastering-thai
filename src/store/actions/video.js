@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import youtube from "../../api/youtube";
-import { requested } from "./ui";
+import { requested, setError } from "./ui";
 export const loadVideos = () => async (dispatch) => {
     try {
         dispatch(requested(true));
@@ -12,8 +12,9 @@ export const loadVideos = () => async (dispatch) => {
         console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
         dispatch(requested(false));
+        dispatch(setError(null));
     } catch (error) {
-        console.log(error);
+        dispatch(setError(error));
     }
 };
 
@@ -27,7 +28,7 @@ export const loadVideo = (id) => async (dispatch) => {
         console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEO, payload: response.data.items[0] });
     } catch (error) {
-        console.log(error);
+        dispatch(setError(error));
     }
 };
 
@@ -49,7 +50,8 @@ export const searchVideos = (q) => async (dispatch) => {
         console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
         dispatch(requested(false));
-    } catch (err) {
-        console.log(err);
+        dispatch(setError(null));
+    } catch (error) {
+        dispatch(setError(error));
     }
 };

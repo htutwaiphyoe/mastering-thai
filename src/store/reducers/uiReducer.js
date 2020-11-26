@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     selected: false,
     listRef: null,
+    error: null,
 };
 
 export default (state = initialState, action) => {
@@ -14,6 +15,8 @@ export default (state = initialState, action) => {
             return updateObject(state, { selected: action.payload });
         case actionTypes.GET_LIST_REF:
             return updateObject(state, { listRef: action.payload });
+        case actionTypes.ERROR:
+            return updateObject(state, { error: action.payload, loading: false });
         default:
             return state;
     }

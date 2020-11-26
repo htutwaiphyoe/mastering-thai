@@ -24,3 +24,10 @@ export const getListRef = (list) => {
         payload: list,
     };
 };
+
+export const setError = (payload) => {
+    return {
+        type: actionTypes.ERROR,
+        payload,
+    };
+};
