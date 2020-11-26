@@ -39,6 +39,7 @@ export const selectVideo = (video) => {
 
 export const searchVideos = (q) => async (dispatch) => {
     try {
+        dispatch(requested(true));
         const response = await youtube.get(`/search`, {
             params: {
                 q,
@@ -46,6 +47,7 @@ export const searchVideos = (q) => async (dispatch) => {
         });
         console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
+        dispatch(requested(false));
     } catch (err) {
         console.log(err);
     }

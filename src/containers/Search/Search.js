@@ -7,6 +7,7 @@ const Search = (props) => {
     const dispatch = useDispatch();
     const shownVideos = useSelector((state) => state.videos.shownVideos);
     const list = useSelector((state) => state.ui.listRef);
+    const loading = useSelector((state) => state.ui.loading);
     const query = new URLSearchParams(props.location.search);
     let id = "";
     for (let params of query.entries()) {
@@ -35,6 +36,19 @@ const Search = (props) => {
             window.removeEventListener("scroll", scrollHandler);
         };
     }, [scrollHandler, dispatch]);
+    if (loading) {
+        return (
+            <VideoList
+                videos={[
+                    { id: 1, loading },
+                    { id: 2, loading },
+                    { id: 3, loading },
+                    { id: 4, loading },
+                    { id: 5, loading },
+                ]}
+            />
+        );
+    }
     return <VideoList videos={shownVideos} />;
 };
 
