@@ -3,3 +3,13 @@
     width: 3rem !important;
     color: rgb(53, 53, 170);
 }
+.NavigationItem.Search {
+    cursor: pointer;
+    display: none;
+}
+
+@media only screen and (max-width: 576px) {
+    .NavigationItem.Search {
+        display: initial;
+    }
+}

@@ -31,3 +31,10 @@ export const setError = (payload) => {
         payload,
     };
 };
+
+export const search = (payload) => {
+    return {
+        type: actionTypes.SEARCH,
+        payload,
+    };
+};

@@ -5,6 +5,7 @@ const initialState = {
     selected: false,
     listRef: null,
     error: null,
+    search: false,
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +18,8 @@ export default (state = initialState, action) => {
             return updateObject(state, { listRef: action.payload });
         case actionTypes.ERROR:
             return updateObject(state, { error: action.payload, loading: false });
+        case actionTypes.SEARCH:
+            return updateObject(state, { search: action.payload });
         default:
             return state;
     }

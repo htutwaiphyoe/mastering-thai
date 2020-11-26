@@ -2,7 +2,46 @@
     flex: 1;
     text-align: center;
 }
-
+.SearchBar2 {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1em 0;
+    padding-right: 2rem;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f7f7;
+}
+.SearchBar2.Open {
+    display: flex;
+}
+.SearchForm2 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.SearchClose {
+    width: 5rem;
+    text-align: center;
+}
+.SearchInput2 {
+    width: 100%;
+    line-height: 3rem;
+    padding-left: 1rem;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 1.6rem;
+    border: 1px solid #aaa;
+    color: #333;
+    outline: none;
+}
+.SearchCloseIcon {
+    font-size: 2.2rem !important;
+    color: rgb(53, 53, 170) !important;
+}
 .SearchForm {
     width: 100%;
     display: flex;
@@ -55,10 +94,13 @@
 }
 
 @media only screen and (max-width: 576px) {
-    .SearchBtn {
+    .SearchForm {
         display: none;
     }
-    .SearchInput {
-        width: 95%;
+}
+
+@media only screen and (min-width: 576px) {
+    .SearchBar2.Open {
+        display: none;
     }
 }
