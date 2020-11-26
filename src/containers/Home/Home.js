@@ -31,7 +31,9 @@ const Home = (props) => {
             window.removeEventListener("scroll", scrollHandler);
         };
     }, [scrollHandler]);
-
+    if (error) {
+        return <MessageBox message={error.message} />;
+    }
     if (loading) {
         return (
             <VideoList
@@ -46,9 +48,7 @@ const Home = (props) => {
         );
     }
     console.log(error);
-    if (error) {
-        return <MessageBox message={error.message} />;
-    }
+
     return <VideoList videos={shownVideos} />;
 };
 

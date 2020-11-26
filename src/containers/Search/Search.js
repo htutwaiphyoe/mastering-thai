@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import * as actionCreators from "../../store/actions";
 import VideoList from "../../components/VideoList/VideoList";
+import MessageBox from "../../components/MessageBox/MessageBox";
 const Search = (props) => {
     const dispatch = useDispatch();
     const shownVideos = useSelector((state) => state.videos.shownVideos);
@@ -37,6 +38,9 @@ const Search = (props) => {
             window.removeEventListener("scroll", scrollHandler);
         };
     }, [scrollHandler, dispatch]);
+    if (error) {
+        return <MessageBox message={error.message} />;
+    }
     if (loading) {
         return (
             <VideoList
@@ -50,9 +54,7 @@ const Search = (props) => {
             />
         );
     }
-    if (error) {
-        return <div>Error</div>;
-    }
+
     return <VideoList videos={shownVideos} />;
 };
 
