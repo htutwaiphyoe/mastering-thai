@@ -13,6 +13,7 @@ const SearchBar = (props) => {
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
+        dispatch(actionCreators.search(false));
         const q = query.trim();
         if (q) {
             dispatch(actionCreators.searchVideos(q));
@@ -39,6 +40,7 @@ const SearchBar = (props) => {
                         className={classes.SearchInput}
                         value={query}
                         onChange={onChangeHandler}
+                        autoComplete
                     />
                     <button type="submit" className={classes.SearchBtn}>
                         <i className={`search icon ${classes.SearchIcon}`}></i>
