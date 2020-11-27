@@ -10,7 +10,9 @@ const Watch = (props) => {
     const dispatch = useDispatch();
     const shownVideos = useSelector((state) => state.videos.shownVideos);
     const selectedVideo = useSelector((state) => state.videos.selectedVideo);
+    const loading = useSelector((state) => state.ui.loading);
     const list = useSelector((state) => state.ui.listRef);
+
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(actionCreators.selected(true));
@@ -35,6 +37,24 @@ const Watch = (props) => {
     if (shownVideos.length === 0) {
         return <Redirect to="/" />;
     }
+    console.log(loading);
+    if (loading) {
+        return (
+            <div className={classes.Watch}>
+                <VideoDetial video={null} />
+                <VideoList
+                    videos={[
+                        { id: 1, loading },
+                        { id: 2, loading },
+                        { id: 3, loading },
+                        { id: 4, loading },
+                        { id: 5, loading },
+                    ]}
+                />
+            </div>
+        );
+    }
+    console.log(shownVideos);
     return (
         <div className={classes.Watch}>
             <VideoDetial video={selectedVideo} />

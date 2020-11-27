@@ -47,7 +47,6 @@ const Home = (props) => {
             />
         );
     }
-    console.log(error);
 
     return <VideoList videos={shownVideos} />;
 };

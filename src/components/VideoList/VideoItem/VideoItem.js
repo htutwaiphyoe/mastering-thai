@@ -12,6 +12,7 @@ const VideoItem = (props) => {
     const { video } = props;
     const onClickHandler = () => {
         if (!video.loading) {
+            dispatch(actionCreators.requested(true));
             dispatch(actionCreators.selectVideo(video));
             dispatch(actionCreators.selected(true));
 
@@ -22,6 +23,10 @@ const VideoItem = (props) => {
                         : encodeURIComponent(video.id)
                 }`
             );
+            window.scrollTo(0, 0);
+            setTimeout(() => {
+                dispatch(actionCreators.requested(false));
+            }, 1000);
         }
     };
     return (
