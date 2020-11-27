@@ -8,6 +8,7 @@
     top: 0;
     left: 0;
     padding: 1em 0;
+    z-index: 100;
     padding-right: 2rem;
     display: none;
     justify-content: space-between;
