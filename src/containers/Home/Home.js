@@ -12,6 +12,8 @@ const Home = (props) => {
     const list = useSelector((state) => state.ui.listRef);
     useEffect(() => {
         window.scrollTo(0, 0);
+    }, []);
+    useEffect(() => {
         dispatch(actionCreators.selected(false));
         dispatch(actionCreators.loadVideos());
     }, [dispatch]);

@@ -23,6 +23,8 @@ const Watch = (props) => {
     }, [list, dispatch, shownVideos.length]);
     useEffect(() => {
         window.scrollTo(0, 0);
+    }, []);
+    useEffect(() => {
         dispatch(actionCreators.selected(true));
         window.addEventListener("scroll", scrollHandler);
         return () => {

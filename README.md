@@ -1,6 +1,6 @@
-# Vtube - YouTube Clone
+# Vtube - Video Player
 
-## Powered by YouTube API
+Powered by YouTube API
 
 ## Features
 
@@ -8,3 +8,6 @@
 - Search any video
 - Play videos
 - 50 videos for each search
+- Skeleton Loader
+- Responsive
+- PWA

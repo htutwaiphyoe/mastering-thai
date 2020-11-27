@@ -9,7 +9,6 @@ export const loadVideos = () => async (dispatch) => {
                 chart: "mostPopular",
             },
         });
-        console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
         dispatch(requested(false));
         dispatch(setError(null));
@@ -25,7 +24,6 @@ export const loadVideo = (id) => async (dispatch) => {
                 id,
             },
         });
-        console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEO, payload: response.data.items[0] });
     } catch (error) {
         dispatch(setError(error));
@@ -47,7 +45,6 @@ export const searchVideos = (q) => async (dispatch) => {
                 q,
             },
         });
-        console.log(response);
         dispatch({ type: actionTypes.STORE_VIDEOS, payload: response.data.items });
         dispatch(requested(false));
         dispatch(setError(null));

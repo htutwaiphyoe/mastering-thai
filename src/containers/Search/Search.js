@@ -17,12 +17,14 @@ const Search = (props) => {
     }
     useEffect(() => {
         window.scrollTo(0, 0);
+    }, []);
+    useEffect(() => {
         dispatch(actionCreators.selected(false));
         if (id) {
             dispatch(actionCreators.searchVideos(id));
         }
     }, [dispatch, id]);
-    console.log("search rendered");
+
     const scrollHandler = useCallback(() => {
         if (list) {
             if (window.scrollY + window.innerHeight > (list.clientHeight * 4) / 5) {

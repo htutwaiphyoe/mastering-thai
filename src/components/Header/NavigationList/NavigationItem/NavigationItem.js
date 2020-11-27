@@ -11,7 +11,6 @@ const NavigationItem = (props) => {
     }
     const onClickHandler = () => {
         if (props.icon === "search") {
-            console.log("Search");
             dispatch(actionCreators.search(true));
         }
     };
