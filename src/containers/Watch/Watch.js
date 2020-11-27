@@ -25,6 +25,11 @@ const Watch = (props) => {
         window.scrollTo(0, 0);
     }, []);
     useEffect(() => {
+        if (!selectedVideo) {
+            props.history.replace("/");
+        }
+    }, [selectedVideo, props.history]);
+    useEffect(() => {
         dispatch(actionCreators.selected(true));
         window.addEventListener("scroll", scrollHandler);
         return () => {

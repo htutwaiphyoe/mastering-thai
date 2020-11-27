@@ -17,11 +17,12 @@ const SearchBar = (props) => {
         const q = query.trim();
         if (q) {
             dispatch(actionCreators.searchVideos(q));
+            setQuery("");
+            props.history.push({
+                pathname: "/search",
+                search: `?${encodeURIComponent("q")}=${encodeURIComponent(q)}`,
+            });
         }
-        props.history.push({
-            pathname: "/search",
-            search: `?${encodeURIComponent("q")}=${encodeURIComponent(q)}`,
-        });
     };
     const closeSearchBar = () => {
         dispatch(actionCreators.search(false));
