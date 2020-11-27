@@ -1,8 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
 const VideoDetial = (props) => {
-    const { video } = props;
+    const video = useSelector((state) => state.videos.selectedVideo) 
+   
     if (video) {
         const url = `https://www.youtube.com/embed/${
             typeof video.id === "object" ? video.id.videoId : video.id
@@ -36,9 +37,5 @@ const VideoDetial = (props) => {
     }
 };
 
-const mapStateToProps = (state) => {
-    return {
-        video: state.videos.selectedVideo,
-    };
-};
-export default connect(mapStateToProps)(VideoDetial);
+
+export default VideoDetial;

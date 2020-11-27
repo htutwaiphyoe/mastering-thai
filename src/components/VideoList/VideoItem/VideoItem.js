@@ -13,6 +13,7 @@ const VideoItem = (props) => {
     const onClickHandler = () => {
         if (!video.loading) {
             dispatch(actionCreators.requested(true));
+
             dispatch(actionCreators.selectVideo(video));
             dispatch(actionCreators.selected(true));
 
@@ -58,4 +59,4 @@ const VideoItem = (props) => {
     );
 };
 
-export default withRouter(VideoItem);
+export default React.memo(withRouter(VideoItem));

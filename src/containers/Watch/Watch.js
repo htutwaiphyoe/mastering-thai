@@ -12,12 +12,6 @@ const Watch = (props) => {
     const selectedVideo = useSelector((state) => state.videos.selectedVideo);
     const loading = useSelector((state) => state.ui.loading);
     const list = useSelector((state) => state.ui.listRef);
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        dispatch(actionCreators.selected(true));
-    }, [dispatch]);
-
     const scrollHandler = useCallback(() => {
         if (list) {
             if (window.scrollY + window.innerHeight > (list.clientHeight * 4) / 5) {
@@ -28,16 +22,18 @@ const Watch = (props) => {
         }
     }, [list, dispatch, shownVideos.length]);
     useEffect(() => {
+        window.scrollTo(0, 0);
+        dispatch(actionCreators.selected(true));
         window.addEventListener("scroll", scrollHandler);
         return () => {
             window.removeEventListener("scroll", scrollHandler);
         };
-    }, [scrollHandler]);
+    }, [dispatch, scrollHandler]);
 
     if (shownVideos.length === 0) {
         return <Redirect to="/" />;
     }
-    console.log(loading);
+
     if (loading) {
         return (
             <div className={classes.Watch}>
@@ -54,7 +50,6 @@ const Watch = (props) => {
             </div>
         );
     }
-    console.log(shownVideos);
     return (
         <div className={classes.Watch}>
             <VideoDetial video={selectedVideo} />

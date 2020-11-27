@@ -22,6 +22,7 @@ const Search = (props) => {
             dispatch(actionCreators.searchVideos(id));
         }
     }, [dispatch, id]);
+    console.log("search rendered");
     const scrollHandler = useCallback(() => {
         if (list) {
             if (window.scrollY + window.innerHeight > (list.clientHeight * 4) / 5) {
