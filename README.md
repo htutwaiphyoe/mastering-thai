@@ -2,7 +2,7 @@
 
 Powered by YouTube API
 
-See in action [Vtube][https://vtube-292802.web.app]
+See in action [Vtube](https://vtube-292802.web.app)
 
 ## Technologies
 
