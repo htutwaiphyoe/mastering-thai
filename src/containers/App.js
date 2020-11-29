@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Layout from "./Layout/Layout";
 
 const Home = React.lazy(() => import("./Home/Home"));
@@ -14,6 +14,7 @@ const App = (props) => {
                         <Route path="/" component={Home} exact />
                         <Route path="/watch" component={Watch} exact />
                         <Route path="/search" component={Search} exact />
+                        <Redirect to="/" />
                     </Switch>
                 </Suspense>
             </Layout>
